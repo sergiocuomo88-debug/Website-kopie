@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UV-Rechner – Sonnenschutz für dein Baby | baby-wetter</title>
+    <meta name="description" content="UV-Index an deinem Standort prüfen und optimalen Sonnenschutz für dein Baby finden.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👶</text></svg>">
+</head>
+<body>
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <p>Wir verwenden Cookies und den Standort deines Geräts, um dir wetterbasierte Empfehlungen geben zu können.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="btn btn-primary btn-sm">Akzeptieren</button>
+                <button id="cookie-decline" class="btn btn-outline btn-sm">Ablehnen</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">👶</span>
+                <span class="logo-text">baby-wetter</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav" id="main-nav">
+                <a href="index.html" class="nav-link">Kleidungsrechner</a>
+                <a href="temperatur-tabellen.html" class="nav-link">Temperatur-Tabellen</a>
+                <a href="uv-rechner.html" class="nav-link active">UV-Rechner</a>
+                <a href="luftqualitaet.html" class="nav-link">Luftqualität</a>
+                <a href="altersrechner.html" class="nav-link">Altersrechner</a>
+                <a href="babykleidung-abc.html" class="nav-link">Babykleidung ABC</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>UV-Rechner</h1>
+            <p>Prüfe den UV-Index an deinem Standort und schütze dein Baby vor schädlicher UV-Strahlung.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-card">
+                <h2>UV-Index prüfen</h2>
+                <p>Der UV-Index (UVI) misst die Stärke der sonnenbrandwirksamen UV-Strahlung auf einer Skala von 1 bis 11+. Je höher der Wert, desto größer das Sonnenbrandrisiko.</p>
+
+                <div class="calc-step">
+                    <label class="calc-label">Standort</label>
+                    <div class="location-input-group">
+                        <input type="text" id="uv-location-input" class="input" placeholder="Stadt eingeben (z.B. München)">
+                        <button id="uv-location-btn" class="btn btn-icon" title="Meinen Standort verwenden">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                            </svg>
+                        </button>
+                        <button id="uv-search-btn" class="btn btn-primary">Prüfen</button>
+                    </div>
+                    <div id="uv-status" class="location-status"></div>
+                </div>
+
+                <div id="uv-loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>UV-Daten werden geladen...</p>
+                </div>
+
+                <div id="uv-results" class="hidden">
+                    <h3 id="uv-location-name"></h3>
+
+                    <!-- UV Scale -->
+                    <div class="uv-scale">
+                        <div class="uv-level uv-low">1-2<br>Niedrig</div>
+                        <div class="uv-level uv-moderate">3-5<br>Mäßig</div>
+                        <div class="uv-level uv-high">6-7<br>Hoch</div>
+                        <div class="uv-level uv-very-high">8-10<br>Sehr hoch</div>
+                        <div class="uv-level uv-extreme">11+<br>Extrem</div>
+                    </div>
+
+                    <!-- UV Result -->
+                    <div class="uv-result">
+                        <span class="uv-value" id="uv-value">--</span>
+                        <div class="uv-category" id="uv-category">--</div>
+                        <p class="uv-recommendation" id="uv-advice"></p>
+                    </div>
+
+                    <!-- 7-day forecast -->
+                    <h3>7-Tage UV-Vorhersage</h3>
+                    <div class="uv-forecast" id="uv-forecast"></div>
+                </div>
+            </div>
+
+            <!-- UV Info -->
+            <div class="content-card">
+                <h2>UV-Schutz für Babys</h2>
+                <p>Die Haut von Babys ist besonders empfindlich. Sie ist dünner als die Haut von Erwachsenen und der natürliche Schutzmechanismus ist noch nicht vollständig entwickelt.</p>
+
+                <h3>Wichtige Regeln</h3>
+                <div class="info-cards" style="margin-top: 16px">
+                    <div class="info-card">
+                        <div class="info-icon">🚫</div>
+                        <h3>Kein direktes Sonnenlicht</h3>
+                        <p>Babys im ersten Lebensjahr sollten keiner direkten Sonnenstrahlung ausgesetzt werden.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">👕</div>
+                        <h3>UV-Schutzkleidung</h3>
+                        <p>Spezielle UV-Kleidung mit UPF 50+ bietet hervorragenden Schutz. Sie enthält Partikel, die UV-Strahlen reflektieren.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🧴</div>
+                        <h3>Sonnencreme LSF 50+</h3>
+                        <p>Ab dem 6. Monat kann Sonnencreme mit mineralischem Filter auf unbedeckte Hautstellen aufgetragen werden.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">⏰</div>
+                        <h3>Mittagssonne meiden</h3>
+                        <p>Zwischen 11 und 15 Uhr ist die UV-Strahlung am stärksten. Halte dein Baby in dieser Zeit im Schatten.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>baby-wetter</h4>
+                    <p>Die ideale Babykleidung für jedes Wetter.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechner</h4>
+                    <ul>
+                        <li><a href="index.html">Kleidungsrechner</a></li>
+                        <li><a href="uv-rechner.html">UV-Rechner</a></li>
+                        <li><a href="luftqualitaet.html">Luftqualitäts-Rechner</a></li>
+                        <li><a href="altersrechner.html">Baby-Altersrechner</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Informationen</h4>
+                    <ul>
+                        <li><a href="temperatur-tabellen.html">Temperatur-Tabellen</a></li>
+                        <li><a href="babykleidung-abc.html">Babykleidung ABC</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 baby-wetter. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/weather-api.js"></script>
+    <script src="js/clothing-logic.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

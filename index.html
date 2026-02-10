@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby-Wetter | Was soll ich meinem Baby anziehen?</title>
+    <meta name="description" content="Finde die ideale Babykleidung für jedes Wetter. Kleidungsrechner, UV-Rechner, Luftqualität und Temperatur-Tabellen für dein Baby.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👶</text></svg>">
+</head>
+<body>
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <p>Wir verwenden Cookies und den Standort deines Geräts, um dir wetterbasierte Kleidungsempfehlungen geben zu können. Mehr Infos in unserer <a href="#datenschutz">Datenschutzerklärung</a>.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="btn btn-primary btn-sm">Akzeptieren</button>
+                <button id="cookie-decline" class="btn btn-outline btn-sm">Ablehnen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">👶</span>
+                <span class="logo-text">baby-wetter</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav" id="main-nav">
+                <a href="index.html" class="nav-link active">Kleidungsrechner</a>
+                <a href="temperatur-tabellen.html" class="nav-link">Temperatur-Tabellen</a>
+                <a href="uv-rechner.html" class="nav-link">UV-Rechner</a>
+                <a href="luftqualitaet.html" class="nav-link">Luftqualität</a>
+                <a href="altersrechner.html" class="nav-link">Altersrechner</a>
+                <a href="babykleidung-abc.html" class="nav-link">Babykleidung ABC</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Was soll ich meinem Baby anziehen?</h1>
+            <p class="hero-subtitle">Finde die ideale Kleidung für dein Baby basierend auf dem aktuellen Wetter an deinem Standort.</p>
+        </div>
+    </section>
+
+    <!-- Clothing Calculator -->
+    <section class="calculator-section" id="kleidungsrechner">
+        <div class="container">
+            <div class="calculator-card">
+                <h2>Kleidungsrechner</h2>
+                <p class="calculator-desc">Gib deinen Standort ein und erhalte sofort passende Kleidungsempfehlungen für dein Baby.</p>
+
+                <!-- Step 1: Baby Age -->
+                <div class="calc-step">
+                    <label class="calc-label">Alter deines Babys</label>
+                    <div class="btn-group" id="age-group">
+                        <button class="btn-toggle active" data-value="0-3">0–3 Monate</button>
+                        <button class="btn-toggle" data-value="4+">4+ Monate</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Situation -->
+                <div class="calc-step">
+                    <label class="calc-label">Situation</label>
+                    <div class="btn-group situation-group" id="situation-group">
+                        <button class="btn-toggle active" data-value="kinderwagen">
+                            <span class="situation-icon">🚼</span>
+                            Kinderwagen
+                        </button>
+                        <button class="btn-toggle" data-value="trage">
+                            <span class="situation-icon">👩‍🍼</span>
+                            Babytrage
+                        </button>
+                        <button class="btn-toggle" data-value="auto">
+                            <span class="situation-icon">🚗</span>
+                            Auto
+                        </button>
+                        <button class="btn-toggle" data-value="schlafen">
+                            <span class="situation-icon">😴</span>
+                            Schlafen
+                        </button>
+                        <button class="btn-toggle" data-value="zuhause">
+                            <span class="situation-icon">🏠</span>
+                            Zuhause
+                        </button>
+                        <button class="btn-toggle" data-value="allgemein">
+                            <span class="situation-icon">👶</span>
+                            Allgemein
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Location -->
+                <div class="calc-step">
+                    <label class="calc-label">Standort</label>
+                    <div class="location-input-group">
+                        <input type="text" id="location-input" class="input" placeholder="Stadt eingeben (z.B. Berlin)">
+                        <button id="location-btn" class="btn btn-icon" title="Meinen Standort verwenden">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                            </svg>
+                        </button>
+                        <button id="search-btn" class="btn btn-primary">Berechnen</button>
+                    </div>
+                    <div id="location-status" class="location-status"></div>
+                </div>
+
+                <!-- Loading -->
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Wetterdaten werden geladen...</p>
+                </div>
+
+                <!-- Results -->
+                <div id="results" class="results hidden">
+                    <!-- Weather Info -->
+                    <div class="weather-info" id="weather-info">
+                        <div class="weather-main">
+                            <span class="weather-icon" id="weather-icon">☀️</span>
+                            <div>
+                                <span class="weather-temp" id="weather-temp">--°C</span>
+                                <span class="weather-feels" id="weather-feels">Gefühlt: --°C</span>
+                            </div>
+                        </div>
+                        <div class="weather-details">
+                            <div class="weather-detail">
+                                <span class="detail-label">Wind</span>
+                                <span class="detail-value" id="weather-wind">-- km/h</span>
+                            </div>
+                            <div class="weather-detail">
+                                <span class="detail-label">Luftfeuchtigkeit</span>
+                                <span class="detail-value" id="weather-humidity">--%</span>
+                            </div>
+                            <div class="weather-detail">
+                                <span class="detail-label">UV-Index</span>
+                                <span class="detail-value" id="weather-uvi">--</span>
+                            </div>
+                            <div class="weather-detail">
+                                <span class="detail-label">Standort</span>
+                                <span class="detail-value" id="weather-location">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clothing Recommendation -->
+                    <div class="clothing-recommendation">
+                        <h3>Kleidungsempfehlung</h3>
+                        <div class="clothesline" id="clothesline">
+                            <!-- Clothing items rendered by JS -->
+                        </div>
+                        <div class="clothing-list" id="clothing-list">
+                            <!-- Text list rendered by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Tips -->
+                    <div class="tips-box" id="tips-box">
+                        <h4>Tipps</h4>
+                        <ul id="tips-list"></ul>
+                    </div>
+
+                    <!-- UV Warning if applicable -->
+                    <div class="uv-warning hidden" id="uv-warning">
+                        <h4>☀️ UV-Warnung</h4>
+                        <p id="uv-warning-text"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Cards -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">🧣</div>
+                    <h3>Zwiebelprinzip</h3>
+                    <p>Ziehe deinem Baby mehrere dünne Schichten an statt weniger dicker. Zwischen den Schichten bilden sich isolierende Luftpolster, und du kannst leicht Schichten hinzufügen oder entfernen.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">👆</div>
+                    <h3>Nackentest</h3>
+                    <p>Lege 2 Finger in den Nacken deines Babys: Warm und trocken = perfekt. Heiß und verschwitzt = zu warm angezogen. Kalt = zu dünn angezogen. Kalte Hände und Füße sind kein Zeichen für Frieren!</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">👗</div>
+                    <h3>Faustregel</h3>
+                    <p>Dein Baby sollte immer eine Kleidungsschicht mehr tragen als du selbst. Im Kinderwagen fehlt die Bewegungswärme, weshalb ein Fußsack als zusätzliche Schicht für den Unterkörper dient.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>baby-wetter</h4>
+                    <p>Die ideale Babykleidung für jedes Wetter. Entwickelt mit Empfehlungen von erfahrenen Hebammen.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechner</h4>
+                    <ul>
+                        <li><a href="index.html">Kleidungsrechner</a></li>
+                        <li><a href="uv-rechner.html">UV-Rechner</a></li>
+                        <li><a href="luftqualitaet.html">Luftqualitäts-Rechner</a></li>
+                        <li><a href="altersrechner.html">Baby-Altersrechner</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Informationen</h4>
+                    <ul>
+                        <li><a href="temperatur-tabellen.html">Temperatur-Tabellen</a></li>
+                        <li><a href="babykleidung-abc.html">Babykleidung ABC</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><a href="#datenschutz">Datenschutz</a></li>
+                        <li><a href="#impressum">Impressum</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 baby-wetter. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/weather-api.js"></script>
+    <script src="js/clothing-logic.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

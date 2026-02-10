@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperatur-Tabellen – Babykleidung für jede Temperatur | baby-wetter</title>
+    <meta name="description" content="Die richtige Babykleidung für jede Temperatur. Übersichtliche Tabellen für Kinderwagen, Trage und Schlafen.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👶</text></svg>">
+</head>
+<body>
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <p>Wir verwenden Cookies für die Funktionalität dieser Seite.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="btn btn-primary btn-sm">Akzeptieren</button>
+                <button id="cookie-decline" class="btn btn-outline btn-sm">Ablehnen</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">👶</span>
+                <span class="logo-text">baby-wetter</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav" id="main-nav">
+                <a href="index.html" class="nav-link">Kleidungsrechner</a>
+                <a href="temperatur-tabellen.html" class="nav-link active">Temperatur-Tabellen</a>
+                <a href="uv-rechner.html" class="nav-link">UV-Rechner</a>
+                <a href="luftqualitaet.html" class="nav-link">Luftqualität</a>
+                <a href="altersrechner.html" class="nav-link">Altersrechner</a>
+                <a href="babykleidung-abc.html" class="nav-link">Babykleidung ABC</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Temperatur-Tabellen</h1>
+            <p>Die ideale Babykleidung für jede Temperatur – übersichtlich auf einen Blick.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-card">
+                <h2>Kleidungsempfehlungen nach Temperatur</h2>
+                <p>Wähle die Situation und sieh dir die empfohlene Kleidung für jeden Temperaturbereich an. Beachte: Dies sind Richtwerte – mache immer den Nackentest, um sicherzugehen.</p>
+
+                <!-- Situation Tabs -->
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-table-situation="kinderwagen">Kinderwagen</button>
+                    <button class="tab-btn" data-table-situation="trage">Babytrage</button>
+                    <button class="tab-btn" data-table-situation="schlafen">Schlafen</button>
+                </div>
+
+                <div style="overflow-x:auto">
+                    <table class="temp-table">
+                        <thead>
+                            <tr>
+                                <th>Temperatur</th>
+                                <th>Kleidung</th>
+                                <th>Hinweis</th>
+                            </tr>
+                        </thead>
+                        <tbody id="temp-table-body">
+                            <!-- Rendered by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- General tips -->
+            <div class="content-card">
+                <h2>Allgemeine Tipps</h2>
+
+                <h3>Das Zwiebelprinzip</h3>
+                <p>Ziehe deinem Baby mehrere dünne Kleidungsschichten übereinander an. Zwischen den Schichten bilden sich isolierende Luftpolster. So kannst du flexibel auf Temperaturänderungen reagieren.</p>
+
+                <h3>Der Nackentest</h3>
+                <p>Lege zwei Finger in den Nacken deines Babys:</p>
+                <ul style="list-style:none;padding:0;margin:12px 0">
+                    <li style="padding:6px 0">✓ <strong>Warm und trocken</strong> – Dein Baby fühlt sich wohl.</li>
+                    <li style="padding:6px 0">⚠ <strong>Heiß und verschwitzt</strong> – Dein Baby ist zu warm angezogen.</li>
+                    <li style="padding:6px 0">❄ <strong>Kalt</strong> – Dein Baby braucht eine weitere Schicht.</li>
+                </ul>
+                <p><strong>Wichtig:</strong> Kalte Hände und Füße sind bei Babys normal und kein Zeichen dafür, dass dem Baby kalt ist!</p>
+
+                <h3>Kinderwagen vs. Babytrage</h3>
+                <p>In der Babytrage wird dein Baby durch deine Körperwärme mitgewärmt. Daher braucht es in der Trage in der Regel <strong>eine Schicht weniger</strong> als im Kinderwagen. Im Kinderwagen fehlt die Bewegungswärme, weshalb ein Fußsack als zusätzliche Schicht dient.</p>
+
+                <h3>Fußsack im Kinderwagen</h3>
+                <p>Ein Fußsack ersetzt eine Kleidungsschicht für den Unterkörper. Bei Minusgraden ist ein Lammfell-Fußsack besonders empfehlenswert.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>baby-wetter</h4>
+                    <p>Die ideale Babykleidung für jedes Wetter.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechner</h4>
+                    <ul>
+                        <li><a href="index.html">Kleidungsrechner</a></li>
+                        <li><a href="uv-rechner.html">UV-Rechner</a></li>
+                        <li><a href="luftqualitaet.html">Luftqualitäts-Rechner</a></li>
+                        <li><a href="altersrechner.html">Baby-Altersrechner</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Informationen</h4>
+                    <ul>
+                        <li><a href="temperatur-tabellen.html">Temperatur-Tabellen</a></li>
+                        <li><a href="babykleidung-abc.html">Babykleidung ABC</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 baby-wetter. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/weather-api.js"></script>
+    <script src="js/clothing-logic.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

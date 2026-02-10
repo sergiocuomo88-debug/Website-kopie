@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luftqualitäts-Rechner – Schadstoffbelastung prüfen | baby-wetter</title>
+    <meta name="description" content="Prüfe die Luftqualität an deinem Standort und schütze dein Baby vor schädlichen Schadstoffen.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👶</text></svg>">
+</head>
+<body>
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <p>Wir verwenden Cookies und den Standort deines Geräts, um dir standortbasierte Empfehlungen geben zu können.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="btn btn-primary btn-sm">Akzeptieren</button>
+                <button id="cookie-decline" class="btn btn-outline btn-sm">Ablehnen</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">👶</span>
+                <span class="logo-text">baby-wetter</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav" id="main-nav">
+                <a href="index.html" class="nav-link">Kleidungsrechner</a>
+                <a href="temperatur-tabellen.html" class="nav-link">Temperatur-Tabellen</a>
+                <a href="uv-rechner.html" class="nav-link">UV-Rechner</a>
+                <a href="luftqualitaet.html" class="nav-link active">Luftqualität</a>
+                <a href="altersrechner.html" class="nav-link">Altersrechner</a>
+                <a href="babykleidung-abc.html" class="nav-link">Babykleidung ABC</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Luftqualitäts-Rechner</h1>
+            <p>Prüfe die aktuelle Luftqualität an deinem Standort und schütze dein Baby vor schädlichen Schadstoffen.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-card">
+                <h2>Luftqualität prüfen</h2>
+                <p>Der europäische Luftqualitätsindex (EAQI) zeigt dir, wie sauber die Luft an deinem Standort ist und ob es sicher ist, mit deinem Baby nach draußen zu gehen.</p>
+
+                <div class="calc-step">
+                    <label class="calc-label">Standort</label>
+                    <div class="location-input-group">
+                        <input type="text" id="aq-location-input" class="input" placeholder="Stadt eingeben (z.B. Hamburg)">
+                        <button id="aq-location-btn" class="btn btn-icon" title="Meinen Standort verwenden">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+                            </svg>
+                        </button>
+                        <button id="aq-search-btn" class="btn btn-primary">Prüfen</button>
+                    </div>
+                    <div id="aq-status" class="location-status"></div>
+                </div>
+
+                <div id="aq-loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Luftqualitätsdaten werden geladen...</p>
+                </div>
+
+                <div id="aq-results" class="hidden">
+                    <h3 id="aq-location-name"></h3>
+
+                    <!-- AQI Meter -->
+                    <div class="aqi-meter">
+                        <div class="aqi-pointer" id="aqi-pointer"></div>
+                    </div>
+                    <div class="aqi-labels">
+                        <span>Gut</span>
+                        <span>Befriedigend</span>
+                        <span>Mäßig</span>
+                        <span>Schlecht</span>
+                        <span>Sehr schlecht</span>
+                        <span>Gefährlich</span>
+                    </div>
+
+                    <!-- AQI Result -->
+                    <div class="aqi-result">
+                        <span class="aqi-value" id="aq-value">--</span>
+                        <div class="aqi-category" id="aq-category">--</div>
+                        <p class="uv-recommendation" id="aq-advice"></p>
+                    </div>
+
+                    <!-- Pollutant Details -->
+                    <h3>Schadstoff-Details</h3>
+                    <div class="info-cards" style="margin-top:12px">
+                        <div class="info-card">
+                            <div class="info-icon">🔬</div>
+                            <h3>PM2.5</h3>
+                            <p>Feinstaub &lt; 2.5 &mu;m</p>
+                            <p style="font-size:1.5rem;font-weight:800;color:var(--primary)" id="aq-pm25">--</p>
+                            <p>&mu;g/m&sup3;</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🌫️</div>
+                            <h3>PM10</h3>
+                            <p>Feinstaub &lt; 10 &mu;m</p>
+                            <p style="font-size:1.5rem;font-weight:800;color:var(--primary)" id="aq-pm10">--</p>
+                            <p>&mu;g/m&sup3;</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🚗</div>
+                            <h3>NO<sub>2</sub></h3>
+                            <p>Stickstoffdioxid</p>
+                            <p style="font-size:1.5rem;font-weight:800;color:var(--primary)" id="aq-no2">--</p>
+                            <p>&mu;g/m&sup3;</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">☀️</div>
+                            <h3>O<sub>3</sub></h3>
+                            <p>Ozon</p>
+                            <p style="font-size:1.5rem;font-weight:800;color:var(--primary)" id="aq-o3">--</p>
+                            <p>&mu;g/m&sup3;</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="content-card">
+                <h2>Warum ist Luftqualität für Babys wichtig?</h2>
+                <p>Babys atmen im Verhältnis zu ihrem Körpergewicht mehr Luft ein als Erwachsene. Ihre Lungen sind noch in der Entwicklung, was sie anfälliger für Schadstoffe macht.</p>
+
+                <h3>Tipps für Tage mit schlechter Luftqualität</h3>
+                <ul style="list-style:none;padding:0;margin-top:12px">
+                    <li style="padding:8px 0">✓ Spaziergänge auf Zeiten mit besserer Luftqualität verlegen (früh morgens oder nach Regen)</li>
+                    <li style="padding:8px 0">✓ Stark befahrene Straßen meiden – lieber in Parks oder Grünanlagen spazieren</li>
+                    <li style="padding:8px 0">✓ Bei sehr schlechter Luft drinnen bleiben und nur kurz stoßlüften</li>
+                    <li style="padding:8px 0">✓ Luftreiniger für die Wohnung können bei dauerhaft schlechter Luft helfen</li>
+                    <li style="padding:8px 0">✓ Regelmäßig die Luftqualität prüfen, bevor du mit dem Baby rausgehst</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>baby-wetter</h4>
+                    <p>Die ideale Babykleidung für jedes Wetter.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechner</h4>
+                    <ul>
+                        <li><a href="index.html">Kleidungsrechner</a></li>
+                        <li><a href="uv-rechner.html">UV-Rechner</a></li>
+                        <li><a href="luftqualitaet.html">Luftqualitäts-Rechner</a></li>
+                        <li><a href="altersrechner.html">Baby-Altersrechner</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Informationen</h4>
+                    <ul>
+                        <li><a href="temperatur-tabellen.html">Temperatur-Tabellen</a></li>
+                        <li><a href="babykleidung-abc.html">Babykleidung ABC</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 baby-wetter. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/weather-api.js"></script>
+    <script src="js/clothing-logic.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

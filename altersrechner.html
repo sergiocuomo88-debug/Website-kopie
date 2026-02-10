@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby-Altersrechner – Wie alt ist mein Baby? | baby-wetter</title>
+    <meta name="description" content="Berechne das genaue Alter deines Babys in Tagen, Wochen und Monaten. Mit Meilensteinen für jedes Alter.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👶</text></svg>">
+</head>
+<body>
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <p>Wir verwenden Cookies für die Funktionalität dieser Seite.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="btn btn-primary btn-sm">Akzeptieren</button>
+                <button id="cookie-decline" class="btn btn-outline btn-sm">Ablehnen</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">👶</span>
+                <span class="logo-text">baby-wetter</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav" id="main-nav">
+                <a href="index.html" class="nav-link">Kleidungsrechner</a>
+                <a href="temperatur-tabellen.html" class="nav-link">Temperatur-Tabellen</a>
+                <a href="uv-rechner.html" class="nav-link">UV-Rechner</a>
+                <a href="luftqualitaet.html" class="nav-link">Luftqualität</a>
+                <a href="altersrechner.html" class="nav-link active">Altersrechner</a>
+                <a href="babykleidung-abc.html" class="nav-link">Babykleidung ABC</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Baby-Altersrechner</h1>
+            <p>Berechne das genaue Alter deines Babys und erfahre, welche Meilensteine anstehen.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="content-card">
+                <h2>Wie alt ist mein Baby?</h2>
+                <p>Gib das Geburtsdatum deines Babys ein (oder den errechneten Geburtstermin, wenn dein Baby noch nicht da ist).</p>
+
+                <div class="calc-step">
+                    <label class="calc-label">Geburtsdatum / Errechneter Termin</label>
+                    <div class="location-input-group" style="max-width:400px">
+                        <input type="date" id="age-date-input" class="input">
+                        <button id="age-calc-btn" class="btn btn-primary">Berechnen</button>
+                    </div>
+                </div>
+
+                <div id="age-result">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>Entwicklung im Überblick</h2>
+                <p>Jedes Baby entwickelt sich in seinem eigenen Tempo. Die folgenden Meilensteine sind Richtwerte – manche Babys sind früher dran, andere später. Beides ist völlig normal.</p>
+
+                <div class="info-cards" style="margin-top:16px">
+                    <div class="info-card">
+                        <div class="info-icon">👶</div>
+                        <h3>0–3 Monate</h3>
+                        <p>Soziales Lächeln, Blickkontakt, Kopf heben in Bauchlage, Reaktion auf Geräusche und Stimmen.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🤲</div>
+                        <h3>3–6 Monate</h3>
+                        <p>Gezieltes Greifen, Drehen, Lachen, Erkennen von Bezugspersonen, Interesse an der Umgebung.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🧸</div>
+                        <h3>6–9 Monate</h3>
+                        <p>Freies Sitzen, erste Zähne, Beikost, Fremdeln, Silben plappern (dadada, mamama).</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🐛</div>
+                        <h3>9–12 Monate</h3>
+                        <p>Krabbeln, Hochziehen, erste Schritte an Möbeln, erste Worte, Zeigegeste.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🚶</div>
+                        <h3>12–18 Monate</h3>
+                        <p>Freies Laufen, Wortschatz wächst, einfache Anweisungen verstehen, Stapelspiele.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🗣️</div>
+                        <h3>18–24 Monate</h3>
+                        <p>Zwei-Wort-Sätze, Treppensteigen, Malen/Kritzeln, Rollenspiele, Trotzphase beginnt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>baby-wetter</h4>
+                    <p>Die ideale Babykleidung für jedes Wetter.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechner</h4>
+                    <ul>
+                        <li><a href="index.html">Kleidungsrechner</a></li>
+                        <li><a href="uv-rechner.html">UV-Rechner</a></li>
+                        <li><a href="luftqualitaet.html">Luftqualitäts-Rechner</a></li>
+                        <li><a href="altersrechner.html">Baby-Altersrechner</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Informationen</h4>
+                    <ul>
+                        <li><a href="temperatur-tabellen.html">Temperatur-Tabellen</a></li>
+                        <li><a href="babykleidung-abc.html">Babykleidung ABC</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 baby-wetter. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/weather-api.js"></script>
+    <script src="js/clothing-logic.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
