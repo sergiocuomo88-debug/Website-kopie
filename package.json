@@ -1,0 +1,14 @@
+{
+  "name": "website-kopie",
+  "version": "1.0.0",
+  "description": "Website-kopie project",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "jest": "^29.7.0"
+  }
+}
