@@ -1,15 +1,21 @@
 # Trigger-Loop: Sync Plattform-Freigaben Flows
 
+> **Flow-IDs in diesem Dokument:**
+> | Alte Bezeichnung | Kanonische ID |
+> |---|---|
+> | Flow 1, Sync Plattform-Freigaben (Sendung → Content) | `sync-plattform-freigaben-sendung-to-content` |
+> | Flow 2, Sync Plattform-Freigaben (Content ← Sendung) | `sync-plattform-freigaben-content-to-sendung` |
+
 ## Status: TEILWEISE BEHOBEN
 **Datum:** 2026-02-24
-**Betrifft:** Sync Plattform-Freigaben (Sendung → Content) & Sync Plattform-Freigaben (Content ← Sendung)
+**Betrifft:** `sync-plattform-freigaben-sendung-to-content` & `sync-plattform-freigaben-content-to-sendung`
 **Symptom:** Flows laufen endlos ohne manuelle Listenänderung, Microsoft Leistungswarnung erhalten
 
 ### Aktueller Zustand (2026-02-24)
 | Flow | Status | Notiz |
 |---|---|---|
-| Sync Plattform-Freigaben (Sendung → Content) | **AKTIV** | Haupt-Sync läuft, Dauerloop gestoppt |
-| Sync Plattform-Freigaben (Content ← Sendung) | **ABGESCHALTET** | Manuell deaktiviert als Sofortmaßnahme |
+| `sync-plattform-freigaben-sendung-to-content` | **AKTIV** | Haupt-Sync läuft, Dauerloop gestoppt |
+| `sync-plattform-freigaben-content-to-sendung` | **ABGESCHALTET** | Manuell deaktiviert als Sofortmaßnahme |
 
 > **Achtung:** Der direkte Ping-Pong-Loop ist gestoppt, aber es muss noch geprüft werden,
 > ob andere aktive Flows indirekt denselben Rückweg erzeugen (siehe Abschnitt "Audit-Checkliste").
@@ -24,11 +30,11 @@ Die beiden Flows "Sync Plattform-Freigaben" synchronisieren Daten in entgegenges
 
 ```
 1. Sendungsliste wird geändert (manuell oder durch Flow)
-   → Triggert "Sync Plattform-Freigaben (Sendung → Content)"
+   → Triggert sync-plattform-freigaben-sendung-to-content
    → Aktualisiert Plattform-Freigaben im Content-Verzeichnis
 
 2. Content-Verzeichnis wurde geändert (durch Flow aus Schritt 1)
-   → Triggert "Sync Plattform-Freigaben (Content ← Sendung)"
+   → Triggert sync-plattform-freigaben-content-to-sendung
    → Aktualisiert Plattform-Freigaben in der Sendungsliste
 
 3. Sendungsliste wurde geändert (durch Flow aus Schritt 2)
@@ -104,7 +110,7 @@ In beiden Listen eine DateTime-Spalte `LastFlowSync` anlegen. Der Flow setzt die
 
 ## Audit-Checkliste: Alle Flows auf Loop-Gefahr prüfen
 
-Der direkte Ping-Pong zwischen Flow 1 und Flow 2 ist durch Abschalten von Flow 2 gestoppt.
+Der direkte Ping-Pong zwischen `sync-plattform-freigaben-sendung-to-content` und `sync-plattform-freigaben-content-to-sendung` ist durch Abschalten von letzterem gestoppt.
 **Aber:** Jeder andere Flow, der in die **Sendungsliste** oder das **Content-Verzeichnis** schreibt,
 kann den Loop indirekt wieder auslösen.
 
@@ -112,9 +118,9 @@ kann den Loop indirekt wieder auslösen.
 
 ```
 SZENARIO A — Indirekter Rückweg (HÖCHSTES RISIKO):
-  Ein anderer Flow ersetzt den abgeschalteten Flow 2:
+  Ein anderer Flow ersetzt den abgeschalteten sync-plattform-freigaben-content-to-sendung:
 
-  Sendungsliste ──[Flow 1]──▶ Content-Verzeichnis
+  Sendungsliste ──[sync-plattform-freigaben-sendung-to-content]──▶ Content-Verzeichnis
        ▲                            │
        │                     [Anderer Flow]
        │                            │
@@ -127,7 +133,7 @@ SZENARIO B — Self-Loop:
 
 SZENARIO C — Kaskade:
   Flow X ändert Content-Verzeichnis → Flow Y triggert darauf
-  → Flow Y schreibt in Sendungsliste → Flow 1 triggert → Loop
+  → Flow Y schreibt in Sendungsliste → sync-plattform-freigaben-sendung-to-content triggert → Loop
 ```
 
 ### Schritt-für-Schritt Prüfung in Power Automate
@@ -150,25 +156,24 @@ Gehe zu Power Automate → Meine Flows → Liste aller aktiven Flows notieren.
 
 | Trigger-Liste | Schreibt in | Risiko | Erklärung |
 |---|---|---|---|
-| Sendungsliste | Content-Verzeichnis | **MITTEL** | Wie Flow 1, könnte Content-seitig Kette auslösen |
-| Content-Verzeichnis | Sendungsliste | **KRITISCH** | Ersetzt den abgeschalteten Flow 2 → Ping-Pong! |
+| Sendungsliste | Content-Verzeichnis | **MITTEL** | Wie `sync-plattform-freigaben-sendung-to-content`, könnte Content-seitig Kette auslösen |
+| Content-Verzeichnis | Sendungsliste | **KRITISCH** | Ersetzt den abgeschalteten `sync-plattform-freigaben-content-to-sendung` → Ping-Pong! |
 | Sendungsliste | Sendungsliste | **KRITISCH** | Self-Loop → triggert sich selbst endlos |
 | Content-Verzeichnis | Content-Verzeichnis | **KRITISCH** | Self-Loop → triggert sich selbst endlos |
-| Andere Liste | Sendungsliste | **MITTEL** | Kann Flow 1 triggern → prüfen ob Kaskade entsteht |
-| Andere Liste | Content-Verzeichnis | **NIEDRIG** | Kein Rückweg, solange Flow 2 aus bleibt |
+| Andere Liste | Sendungsliste | **MITTEL** | Kann `sync-plattform-freigaben-sendung-to-content` triggern → prüfen ob Kaskade entsteht |
+| Andere Liste | Content-Verzeichnis | **NIEDRIG** | Kein Rückweg, solange `sync-plattform-freigaben-content-to-sendung` aus bleibt |
 | Andere Liste | Andere Liste | **KEIN RISIKO** | Unabhängig von der Freigaben-Sync-Kette |
 
 ### Bekannte verdächtige Flows
 
 | Flow | Vermuteter Trigger | Vermutetes Ziel | Risiko | Status |
 |---|---|---|---|---|
-| `sync-sendungs-stand` | Sendungsliste? | Sendungsliste? | **HOCH** — Self-Loop möglich | ⬜ Noch zu prüfen |
-| `sync-sendungs-stand-from-content` | Content-Verzeichnis? | Sendungsliste? | **KRITISCH** — Indirekter Rückweg! | ⬜ Noch zu prüfen |
-| `sync-content-elemente-lookup` | Unbekannt | Content-Verzeichnis? | **MITTEL** — Kaskade möglich | ⬜ Noch zu prüfen |
+| `sync-sendungs-stand-content-to-sendung` (vermutlich = ehem. `sync-sendungs-stand` + `sync-sendungs-stand-from-content`) | Content-Verzeichnis | Sendungsliste | **KRITISCH** — Indirekter Rückweg! | ✅ Identifiziert als Flow 4 in `flows/registry.json`, Safeguard vorhanden |
+| `sync-content-elemente-lookup` (Richtung unklar) | Unbekannt | Content-Verzeichnis? | **MITTEL** — Kaskade möglich | ⬜ Noch zu prüfen |
 
 ### Quick-Check: 3er-Batch-Runs klären
 
-Im Flow-Verlauf von "Sendung → Content" sind Gruppen von je 3 Runs zur gleichen Zeit sichtbar.
+Im Flow-Verlauf von `sync-plattform-freigaben-sendung-to-content` sind Gruppen von je 3 Runs zur gleichen Zeit sichtbar.
 Um zu klären, ob diese von einem anderen Flow stammen:
 
 1. Einen der 3er-Runs öffnen (z.B. von 16:56)

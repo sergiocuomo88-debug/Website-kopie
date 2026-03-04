@@ -20,27 +20,43 @@
 | `Bearbeitungsstautus` | **Bearbeitungsstatus** | Content-Verzeichnis | Nein | Werte: "Entwurf", "In Bearbeitung", "Abnahmebereit", "Fertig" |
 | `Folge_x003a__x0020_Nr_x002e_ID` | **Folge: Nr. ID** (Lookup) | Content-Verzeichnis | Nein | Lookup-Spalte zur Sendungsliste |
 
-## Aktive Power Automate Flows
+## Power Automate Flows
 
-### Flow 1: Sync Plattform-Freigaben (Sendung → Content)
+> **Namenskonvention:** `sync-{domain}-{quelle}-to-{ziel}`
+> Vollständige Zuordnung aller Flows: `flows/registry.json`
+
+### sync-plattform-freigaben-sendung-to-content
+- **Display-Name:** Sync Plattform-Freigaben (Sendung → Content)
+- **Status:** AKTIV
 - **Trigger:** Sendungsliste geändert
 - **Schreibt in:** Content-Verzeichnis
 - **Risiko:** Teil des bidirektionalen Sync-Loops
+- **Legacy:** Flow 1
 
-### Flow 4: Sync Sendungs-Stand ← Content
+### sync-plattform-freigaben-content-to-sendung
+- **Display-Name:** Sync Plattform-Freigaben (Content ← Sendung)
+- **Status:** ABGESCHALTET
+- **Trigger:** Content-Verzeichnis geändert
+- **Schreibt in:** Sendungsliste
+- **Legacy:** Flow 2
+
+### sync-sendungs-stand-content-to-sendung
+- **Display-Name:** Sync Sendungs-Stand ← Content
 - **ID:** `9bcce54b-395e-4a9b-91ed-700da09af079`
+- **Status:** AKTIV
 - **Trigger:** Content-Verzeichnis geändert (Polling alle 5 Min, Concurrency: 1)
 - **Logik:** Berechnet aggregierten Bearbeitungsstatus aller Content-Items einer Sendung
 - **Schreibt in:** Sendungsliste (`field_20` = aggregierter Status, `field_2` = Rechte von als Pflichtfeld)
 - **Safeguard:** Schreibt nur, wenn sich der Status tatsächlich geändert hat (Bedingung_3)
-- **Risiko:** Teil des bidirektionalen Sync-Loops mit Flow 1
+- **Risiko:** Sync-Loop mit `sync-plattform-freigaben-sendung-to-content`
+- **Legacy:** Flow 4, sync-sendungs-stand, sync-sendungs-stand-from-content
 
 ### Bekannter Loop-Pfad
 ```
-Sendungsliste ──[Flow 1]──▶ Content-Verzeichnis
-      ▲                              │
-      │         [Flow 4]             │
-      └──────────────────────────────┘
+Sendungsliste ──[sync-plattform-freigaben-sendung-to-content]──▶ Content-Verzeichnis
+      ▲                                                                │
+      │       [sync-sendungs-stand-content-to-sendung]                 │
+      └────────────────────────────────────────────────────────────────┘
 ```
-Safeguard: Flow 4 schreibt nur bei Status-Differenz → Loop endet nach max. 2 Zyklen.
+Safeguard: `sync-sendungs-stand-content-to-sendung` schreibt nur bei Status-Differenz → Loop endet nach max. 2 Zyklen.
 Aber: Jeder Zyklus verbraucht API-Calls und kann bei vielen gleichzeitigen Änderungen zu Throttling führen.

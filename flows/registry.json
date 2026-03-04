@@ -1,0 +1,46 @@
+{
+  "description": "Power Automate Flow Registry – Single Source of Truth für alle Flow-Identifier",
+  "namingConvention": "sync-{domain}-{quelle}-to-{ziel}",
+  "listAbbreviations": {
+    "Sendungsliste": "sendung",
+    "Content-Verzeichnis": "content"
+  },
+  "flows": [
+    {
+      "canonicalId": "sync-plattform-freigaben-sendung-to-content",
+      "displayName": "Sync Plattform-Freigaben (Sendung → Content)",
+      "uuid": null,
+      "status": "aktiv",
+      "triggerList": "Sendungsliste",
+      "triggerListGuid": "08c76ffb-e10b-4158-92b5-73a509a221cc",
+      "writesList": "Content-Verzeichnis",
+      "writesListGuid": "6e406f83-7400-4568-88d3-25469885a7da",
+      "legacyNames": ["Flow 1"],
+      "description": "Synchronisiert Plattform-Freigaben von der Sendungsliste ins Content-Verzeichnis"
+    },
+    {
+      "canonicalId": "sync-plattform-freigaben-content-to-sendung",
+      "displayName": "Sync Plattform-Freigaben (Content ← Sendung)",
+      "uuid": null,
+      "status": "abgeschaltet",
+      "triggerList": "Content-Verzeichnis",
+      "triggerListGuid": "6e406f83-7400-4568-88d3-25469885a7da",
+      "writesList": "Sendungsliste",
+      "writesListGuid": "08c76ffb-e10b-4158-92b5-73a509a221cc",
+      "legacyNames": ["Flow 2"],
+      "description": "Rückrichtung der Plattform-Freigaben-Sync. Deaktiviert wegen Trigger-Loop."
+    },
+    {
+      "canonicalId": "sync-sendungs-stand-content-to-sendung",
+      "displayName": "Sync Sendungs-Stand ← Content",
+      "uuid": "9bcce54b-395e-4a9b-91ed-700da09af079",
+      "status": "aktiv",
+      "triggerList": "Content-Verzeichnis",
+      "triggerListGuid": "6e406f83-7400-4568-88d3-25469885a7da",
+      "writesList": "Sendungsliste",
+      "writesListGuid": "08c76ffb-e10b-4158-92b5-73a509a221cc",
+      "legacyNames": ["Flow 4", "sync-sendungs-stand", "sync-sendungs-stand-from-content"],
+      "description": "Berechnet aggregierten Bearbeitungsstatus aller Content-Items einer Sendung"
+    }
+  ]
+}
