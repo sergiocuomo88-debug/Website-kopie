@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mythos-Check | eltern-fakten</title>
+    <meta name="description" content="Faktencheck für Eltern – wissenschaftlich geprüft.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">✅</span>
+                <span class="logo-text">eltern-fakten</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav" id="main-nav">
+                <a href="index.html" class="nav-link">Alle Mythen</a>
+                <a href="../index.html" class="nav-link">Baby-Wetter</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Detail Content -->
+    <section class="detail-hero">
+        <div class="container">
+            <a href="index.html" class="back-link" id="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+                Zurück zur Übersicht
+            </a>
+
+            <div id="detail-content">
+                <!-- Rendered by JS -->
+            </div>
+
+            <div class="no-results hidden" id="not-found">
+                <div class="no-results-icon">❓</div>
+                <h3>Mythos nicht gefunden</h3>
+                <p>Dieser Mythos existiert nicht in unserer Datenbank. <a href="index.html">Zurück zur Übersicht</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Myths -->
+    <section class="related-section" id="related-section">
+        <div class="container">
+            <h2 class="section-title">Verwandte Mythen</h2>
+            <div class="mythen-grid" id="related-grid">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>eltern-fakten</h4>
+                    <p>Die häufigsten Eltern-Mythen – wissenschaftlich eingeordnet.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Kategorien</h4>
+                    <ul>
+                        <li><a href="index.html">Alle Mythen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Mehr</h4>
+                    <ul>
+                        <li><a href="../index.html">Baby-Wetter App</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 eltern-fakten. Keine medizinische Beratung.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/mythen-data.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

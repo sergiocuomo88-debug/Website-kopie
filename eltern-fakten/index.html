@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eltern-fakten | Mythen-Check für junge Eltern</title>
+    <meta name="description" content="Die häufigsten Eltern-Mythen wissenschaftlich eingeordnet. Schnelle, verlässliche Antworten statt Verunsicherung durch Social Media.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">✅</span>
+                <span class="logo-text">eltern-fakten</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menü öffnen">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav" id="main-nav">
+                <a href="index.html" class="nav-link active">Alle Mythen</a>
+                <a href="../index.html" class="nav-link">Baby-Wetter</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero + Search -->
+    <section class="hero">
+        <div class="container">
+            <h1>Stimmt das wirklich?</h1>
+            <p class="hero-subtitle">Die häufigsten Eltern-Mythen – wissenschaftlich eingeordnet. Schnelle Antworten statt Verunsicherung.</p>
+            <div class="search-box">
+                <input type="text" id="search-input" class="search-input" placeholder="Was hast du gehört? (z.B. Honig, Schreien lassen, Fieber...)" autocomplete="off">
+                <span class="search-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </span>
+            </div>
+            <p class="search-results-count" id="results-count"></p>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-pills" id="filter-pills">
+                <button class="filter-pill active" data-category="alle">
+                    <span class="filter-pill-icon">📋</span> Alle
+                </button>
+                <button class="filter-pill" data-category="schlafen">
+                    <span class="filter-pill-icon">😴</span> Schlafen
+                </button>
+                <button class="filter-pill" data-category="ernaehrung">
+                    <span class="filter-pill-icon">🍼</span> Ernährung
+                </button>
+                <button class="filter-pill" data-category="gesundheit">
+                    <span class="filter-pill-icon">🩺</span> Gesundheit
+                </button>
+                <button class="filter-pill" data-category="entwicklung">
+                    <span class="filter-pill-icon">🧒</span> Entwicklung
+                </button>
+                <button class="filter-pill" data-category="hausmittel">
+                    <span class="filter-pill-icon">🌿</span> Hausmittel
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Myth Grid -->
+    <section class="mythen-section">
+        <div class="container">
+            <div class="mythen-grid" id="mythen-grid">
+                <!-- Rendered by JS -->
+            </div>
+
+            <!-- No Results -->
+            <div class="no-results hidden" id="no-results">
+                <div class="no-results-icon">🤔</div>
+                <h3>Kein Treffer</h3>
+                <p>Versuche einen anderen Suchbegriff oder wähle eine Kategorie.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section>
+        <div class="container">
+            <div class="disclaimer">
+                <strong>Hinweis:</strong> Diese Seite bietet allgemeine Informationen auf Basis wissenschaftlicher Quellen. Sie ersetzt keine individuelle ärztliche oder hebammenkundliche Beratung. Bei gesundheitlichen Fragen zu deinem Kind wende dich immer an deine Kinderärztin oder deinen Kinderarzt.
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>eltern-fakten</h4>
+                    <p>Die häufigsten Eltern-Mythen – wissenschaftlich eingeordnet. Damit du dich auf das konzentrieren kannst, was wirklich zählt: dein Kind.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Kategorien</h4>
+                    <ul>
+                        <li><a href="#" data-nav-category="schlafen">Schlafen</a></li>
+                        <li><a href="#" data-nav-category="ernaehrung">Ernährung</a></li>
+                        <li><a href="#" data-nav-category="gesundheit">Gesundheit</a></li>
+                        <li><a href="#" data-nav-category="entwicklung">Entwicklung</a></li>
+                        <li><a href="#" data-nav-category="hausmittel">Hausmittel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Mehr</h4>
+                    <ul>
+                        <li><a href="../index.html">Baby-Wetter App</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 eltern-fakten. Keine medizinische Beratung.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/mythen-data.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

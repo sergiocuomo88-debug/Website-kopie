@@ -1,0 +1,811 @@
+/* ============================
+   eltern-fakten – Stylesheet
+   Fact-Checking fuer junge Eltern
+   ============================ */
+
+:root {
+    --primary: #1a8a7d;
+    --primary-dark: #157a6e;
+    --primary-light: #e6f5f3;
+    --stimmt: #27ae60;
+    --stimmt-light: #e8f8ef;
+    --teilweise: #f39c12;
+    --teilweise-light: #fef5e7;
+    --falsch: #e74c3c;
+    --falsch-light: #fdecea;
+    --unklar: #95a5a6;
+    --unklar-light: #f0f3f4;
+    --text: #2d3436;
+    --text-light: #636e72;
+    --text-muted: #b2bec3;
+    --bg: #f8fafb;
+    --bg-white: #ffffff;
+    --border: #e1e8ed;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.1);
+    --shadow-hover: 0 6px 20px rgba(0,0,0,0.12);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 20px;
+    --radius-full: 50px;
+    --font: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+    --max-width: 900px;
+    --transition: 0.2s ease;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ============================
+   Header
+   ============================ */
+.header {
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 12px 0;
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+}
+
+.logo-text {
+    color: var(--primary);
+}
+
+.nav {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary);
+    background: var(--primary-light);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+/* ============================
+   Hero / Search Section
+   ============================ */
+.hero {
+    background: linear-gradient(135deg, var(--primary) 0%, #2db5a3 100%);
+    color: white;
+    padding: 50px 0 60px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 32px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-box {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 16px 24px;
+    padding-right: 56px;
+    font-family: var(--font);
+    font-size: 1.1rem;
+    border: none;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-lg);
+    outline: none;
+    transition: var(--transition);
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-input:focus {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15), 0 0 0 3px rgba(26,138,125,0.2);
+}
+
+.search-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.search-results-count {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* ============================
+   Category Filter
+   ============================ */
+.filter-section {
+    padding: 24px 0 8px;
+}
+
+.filter-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-full);
+    background: var(--bg-white);
+    color: var(--text-light);
+    font-family: var(--font);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.filter-pill:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.filter-pill.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.filter-pill-icon {
+    font-size: 1rem;
+}
+
+/* ============================
+   Myth Grid
+   ============================ */
+.mythen-section {
+    padding: 16px 0 60px;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text);
+}
+
+.mythen-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.mythos-card {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    cursor: pointer;
+    transition: all var(--transition);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.mythos-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.mythos-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.ampel-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.ampel-badge.stimmt {
+    background: var(--stimmt-light);
+    color: var(--stimmt);
+}
+
+.ampel-badge.teilweise {
+    background: var(--teilweise-light);
+    color: var(--teilweise);
+}
+
+.ampel-badge.falsch {
+    background: var(--falsch-light);
+    color: var(--falsch);
+}
+
+.ampel-badge.unklar {
+    background: var(--unklar-light);
+    color: var(--unklar);
+}
+
+.mythos-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    flex: 1;
+}
+
+.mythos-card-snippet {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.mythos-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.kategorie-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.emotion-dots {
+    display: flex;
+    gap: 3px;
+}
+
+.emotion-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+}
+
+.emotion-dot.filled {
+    background: var(--teilweise);
+}
+
+.card-arrow {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.mythos-card:hover .card-arrow {
+    color: var(--primary);
+    transform: translateX(3px);
+}
+
+/* ============================
+   Hot Topics Section
+   ============================ */
+.hot-topics {
+    padding: 0 0 20px;
+}
+
+.hot-topics .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ============================
+   No Results
+   ============================ */
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+}
+
+.no-results-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.no-results h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.no-results p {
+    font-size: 0.95rem;
+}
+
+/* ============================
+   Detail Page
+   ============================ */
+.detail-hero {
+    padding: 40px 0 0;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    transition: var(--transition);
+}
+
+.back-link:hover {
+    color: var(--primary);
+}
+
+.detail-ampel {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+}
+
+.detail-ampel.stimmt {
+    background: var(--stimmt-light);
+    color: var(--stimmt);
+}
+
+.detail-ampel.teilweise {
+    background: var(--teilweise-light);
+    color: var(--teilweise);
+}
+
+.detail-ampel.falsch {
+    background: var(--falsch-light);
+    color: var(--falsch);
+}
+
+.detail-ampel.unklar {
+    background: var(--unklar-light);
+    color: var(--unklar);
+}
+
+.detail-ampel-icon {
+    font-size: 1.2rem;
+}
+
+.detail-mythos {
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.detail-meta {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+/* ============================
+   Detail Content Cards
+   ============================ */
+.detail-section {
+    padding: 0 0 60px;
+}
+
+.content-card {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.content-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.content-card p {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.7;
+}
+
+.kurzantwort-card {
+    border-left: 4px solid var(--primary);
+    background: var(--primary-light);
+    border-color: var(--primary);
+}
+
+.kurzantwort-card.stimmt { border-left-color: var(--stimmt); background: var(--stimmt-light); }
+.kurzantwort-card.teilweise { border-left-color: var(--teilweise); background: var(--teilweise-light); }
+.kurzantwort-card.falsch { border-left-color: var(--falsch); background: var(--falsch-light); }
+.kurzantwort-card.unklar { border-left-color: var(--unklar); background: var(--unklar-light); }
+
+.kurzantwort-card p {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.ab-wann-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+/* Quellen */
+.quellen-list {
+    list-style: none;
+}
+
+.quellen-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.quellen-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.quellen-list a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.quellen-list a:hover {
+    text-decoration: underline;
+}
+
+.quellen-org {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Herkunft */
+.herkunft-card {
+    background: #fef9ef;
+    border-left: 4px solid var(--teilweise);
+}
+
+/* ============================
+   Share Button
+   ============================ */
+.share-section {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.share-btn:hover {
+    background: var(--primary-dark);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-1px);
+}
+
+.share-btn.copied {
+    background: var(--stimmt);
+}
+
+.share-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+}
+
+/* ============================
+   Related Myths
+   ============================ */
+.related-section {
+    padding: 0 0 60px;
+}
+
+.related-section .section-title {
+    margin-bottom: 16px;
+}
+
+/* ============================
+   Disclaimer
+   ============================ */
+.disclaimer {
+    background: var(--unklar-light);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.disclaimer strong {
+    color: var(--text);
+}
+
+/* ============================
+   Footer
+   ============================ */
+.footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.7);
+    padding: 40px 0 24px;
+    margin-top: 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 32px;
+}
+
+.footer h4 {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer ul {
+    list-style: none;
+}
+
+.footer ul li {
+    margin-bottom: 6px;
+}
+
+.footer a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.footer a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* ============================
+   Responsive
+   ============================ */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .search-input {
+        font-size: 1rem;
+        padding: 14px 20px;
+        padding-right: 48px;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-white);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        padding: 12px 20px;
+    }
+
+    .nav.open {
+        display: flex;
+    }
+
+    .filter-pills {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .detail-mythos {
+        font-size: 1.3rem;
+    }
+
+    .detail-meta {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 36px 0 44px;
+    }
+
+    .hero h1 {
+        font-size: 1.3rem;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .content-card {
+        padding: 18px;
+    }
+
+    .mythos-card {
+        padding: 16px;
+    }
+}
